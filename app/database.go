@@ -7,7 +7,7 @@ import (
 )
 
 func NewDB() *sql.DB {
-	db, err := sql.Open("mysql", "root@tcp(localhost:3360)/belajar_golang_api_categories")
+	db, err := sql.Open("mysql", "root@tcp(localhost:3306)/belajar_golang_api_categories")
 	helper.PanicIfError(err)
 
 	db.SetMaxIdleConns(5)

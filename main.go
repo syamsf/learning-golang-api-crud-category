@@ -8,7 +8,9 @@ import (
 	"net/http"
 	"syamsf/learning-golang-api-crud-category/app"
 	"syamsf/learning-golang-api-crud-category/controller"
+	"syamsf/learning-golang-api-crud-category/exception"
 	"syamsf/learning-golang-api-crud-category/helper"
+	"syamsf/learning-golang-api-crud-category/middleware"
 	"syamsf/learning-golang-api-crud-category/repository"
 	"syamsf/learning-golang-api-crud-category/service"
 )
@@ -26,12 +28,14 @@ func main() {
 	router.GET("/api/categories", categoryController.FindAll)
 	router.GET("/api/categories/:categoryId", categoryController.FindById)
 	router.POST("/api/categories", categoryController.Create)
-	router.PUT("/api/categories/:categoriesId", categoryController.Update)
-	router.DELETE("/api/categories/:categoriesId", categoryController.Delete)
+	router.PUT("/api/categories/:categoryId", categoryController.Update)
+	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
+
+	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	fmt.Println("server is running in development mode port 3000")
