@@ -1,22 +1,22 @@
 package helper
 
 import (
-	"syamsf/learning-golang-api-crud-category/model/domain"
-	"syamsf/learning-golang-api-crud-category/model/web"
+  "syamsf/learning-golang-api-crud-category/model/domain"
+  "syamsf/learning-golang-api-crud-category/model/web"
 )
 
 func ToCategoryResponse(category domain.Category) web.CategoryResponse {
-	return web.CategoryResponse{
-		Id:   category.Id,
-		Name: category.Name,
-	}
+  return web.CategoryResponse{
+    Id:   category.Id,
+    Name: category.Name,
+  }
 }
 
 func ToCategoryResponses(categories []domain.Category) []web.CategoryResponse {
-	var categoryResponses []web.CategoryResponse
-	for _, category := range categories {
-		categoryResponses = append(categoryResponses, ToCategoryResponse(category))
-	}
+  var categoryResponses []web.CategoryResponse
+  for _, category := range categories {
+    categoryResponses = append(categoryResponses, ToCategoryResponse(category))
+  }
 
-	return categoryResponses
+  return categoryResponses
 }
